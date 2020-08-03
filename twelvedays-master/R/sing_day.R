@@ -11,28 +11,27 @@
 #' @import dplyr
 #' @import glue
 #' @import purrr
+#' @import english
 #'
 #' @export
-sing_day <- function(dataset, i){
+sing_line <- function(dataset, lain, phrase_col) {
 
-  my_line <- paste("On the", dataset$Day.in.Words[i], "day of Christmas, my true love sent to me", "\n")
+  phrases <- dataset %>% pull({{phrase_col}})
 
-  if(i == 1){
+  x <- paste("On the", english::ordinal(lain), "day of Christmas, my true love sent to me,")
+  y <- paste("")
 
-    my_line <- paste(my_line, dataset$Full.Phrase[i])
-
-  } else{
-
-    for (j in i:2){
-
-      my_line <- paste0(" ", my_line, dataset$Full.Phrase[j], ", ")
-
-    }
-    my_line <- paste(my_line, "and", dataset$Full.Phrase[1])
+  if (lain == 1) {
+    y <- paste(phrases[1])
+  }
+  else {
+    z <- map_chr(lain:2, ~paste0( y, phrases[.x], ", ", sep ="\n")) %>% str_c(collapse ="")
+    z <- paste(z, "and", phrases[1])
+    x <- paste(x, z, sep ="\n")
   }
 
 
-  return(my_line)
+  return(x)
 
 }
 
