@@ -14,6 +14,7 @@
 #' @import english
 #'
 #' @export
+
 sing_day <- function(dataset, lain, phrase_col) {
 
   phrases <- dataset %>% pull({{phrase_col}})
