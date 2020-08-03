@@ -1,0 +1,50 @@
+---
+title: "lab 6"
+author: "Chandradeep Chowdhury"
+date: "8/2/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+xmas <- read.csv("https://www.dropbox.com/s/e584pryn8evm1gz/xmas.csv?dl=1")
+
+
+```
+
+
+```{r}
+pluralize_gift(xmas$Gift.Item)
+
+purrr::map_chr(xmas$Gift.Item, pluralize_gift)
+```
+
+```{r}
+make_phrase(num = 10, 
+            num_word = "ten", 
+            item = "lord", 
+            verb = "a-leaping", 
+            adjective = "", 
+            location = "")
+```
+
+```{r}
+words <- c("a","two","three","four","five","six", "seven", "eight", "nine", "ten","eleven","twelve")
+xmas <- xmas %>%
+  mutate(
+    num_words = words
+  )
+```
+
+```{r}
+xmas <- xmas %>%
+  mutate(
+    Full.Phrase = pmap_chr(xmas, ~make_phrase(..1,..7,..3,..4,..5,..6))
+  )
+```
+
+```{r}
+sing_line(xmas, 11, Full.Phrase) %>% cat()
+```
+
