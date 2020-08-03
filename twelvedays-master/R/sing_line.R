@@ -11,7 +11,7 @@
 #' @import dplyr
 #' @import glue
 #' @import purrr
-#'
+#' @import english
 #'
 #' @export
 
@@ -19,7 +19,7 @@ sing_line <- function(dataset, lain, phrase_col) {
 
   phrases <- dataset %>% pull({{phrase_col}})
 
-  x <- paste("On the", "day of Christmas, my true love sent to me,")
+  x <- paste("On the", english::ordinal(lain), "day of Christmas, my true love sent to me,")
   y <- paste("")
 
   if (lain == 1) {
