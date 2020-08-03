@@ -1,7 +1,7 @@
 #' Takes a noun and makes it plural
 #'
 #' @param dataset A data frame containing information about gifts
-#' @param line The number of the line for the day you want to sing about
+#' @param lain The number of the line for the day you want to sing about
 #' @param phrase_col The variable name for the column in the dataset that
 #' contains the gift phrases
 #'
@@ -14,6 +14,7 @@
 #' @import english
 #'
 #' @export
+
 sing_line <- function(dataset, lain, phrase_col) {
 
   phrases <- dataset %>% pull({{phrase_col}})
